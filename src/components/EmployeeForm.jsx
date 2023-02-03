@@ -27,6 +27,7 @@ export const EmployeeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     id ? editEmployee(id, inputValues) : addEmployee({ id: uuid(), ...inputValues });
     resetForm();
     setshowAlert(true);
@@ -51,28 +52,28 @@ export const EmployeeForm = () => {
             <label className="form-label mt-2" htmlFor="inputValid">
               Name
             </label>
-            <input name="name" type="text" value={inputValues.name} onChange={handleInputChange} className="form-control" id="inputValid" />
+            <input pattern="[a-z]{1,15}" name="name" type="text" value={inputValues.name} onChange={handleInputChange} className="form-control" id="inputValid" title="Username should only contain lowercase letters. e.g. john" required />
           </div>
 
           <div className="form-group">
             <label className="form-label mt-2" htmlFor="inputValid">
               Email
             </label>
-            <input name="email" type="email" value={inputValues.email} onChange={handleInputChange} className="form-control" id="inputValid" />
+            <input pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" name="email" type="email" value={inputValues.email} onChange={handleInputChange} className="form-control" id="inputValid" required />
           </div>
 
           <div className="form-group">
             <label className="form-label mt-2" htmlFor="inputValid">
               Phone
             </label>
-            <input name="phone" type="text" value={inputValues.phone} onChange={handleInputChange} className="form-control" id="inputValid" />
+            <input pattern="^(\+62|62|0)8[1-9][0-9]{6,9}$" name="phone" type="text" value={inputValues.phone} onChange={handleInputChange} className="form-control" id="inputValid" required />
           </div>
 
           <div className="form-group">
             <label htmlFor="inputValid" className="form-label mt-4">
               Position
             </label>
-            <select name="position" type="text" value={inputValues.position} onChange={handleInputChange} className="form-select" id="inputValid">
+            <select name="position" type="text" value={inputValues.position} onChange={handleInputChange} className="form-select" id="inputValid" required>
               <option value="" selected disabled hidden>
                 Choose here
               </option>
@@ -85,8 +86,7 @@ export const EmployeeForm = () => {
             <label className="form-label mt-2" htmlFor="inputValid">
               Message
             </label>
-            {/* <input type="text" name="message" value={inputValues.message} onChange={handleInputChange} className="form-control" id="inputValid" /> */}
-            <textarea type="text" className="form-control" id="inputValid" name="message" value={inputValues.message} onChange={handleInputChange} rows="3" placeholder="type here" />
+            <textarea type="text" className="form-control" id="inputValid" name="message" value={inputValues.message} onChange={handleInputChange} rows="3" placeholder="type here" required />
           </div>
 
           <div className="d-grid gap-2 mt-3">
