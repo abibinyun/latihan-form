@@ -31,9 +31,13 @@ export const ContactForm = () => {
     id ? editContact(id, inputValues) : addContact({ id: uuid(), ...inputValues });
     resetForm();
     setshowAlert(true);
+    window.scrollTo(0, 0)
     setTimeout(() => {
       setshowAlert(false);
-    }, 2000);
+    }, 2500);
+    setTimeout(() => {
+      navigate("/")
+    }, 1000);
   };  
 
   return (
@@ -45,6 +49,14 @@ export const ContactForm = () => {
         <h1 className="text-center">{id ? "Edit" : "Add new"} Contact</h1>
         <div />
       </div>
+
+      {showAlert && (
+        <div className="px-5">
+          <div className="alert alert-success">
+            <strong>Well done!</strong> {id ? "edit" : "added a new"} Contact.
+          </div>
+        </div>
+      )}
 
       <div className="card border-primary p-5 m-5">
         <form onSubmit={handleSubmit}>
@@ -105,13 +117,7 @@ export const ContactForm = () => {
         </form>
       </div>
 
-      {showAlert && (
-        <div className="px-5">
-          <div className="alert alert-success">
-            <strong>Well done!</strong> {id ? "edit" : "added a new"} Contact.
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };
