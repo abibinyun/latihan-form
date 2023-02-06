@@ -1,34 +1,34 @@
-export const getListEmployees = () => {
-  if (!localStorage["employees"]) {
-    localStorage["employees"] = "[]";
+export const getListContacts = () => {
+  if (!localStorage["contacts"]) {
+    localStorage["contacts"] = "[]";
   }
 
-  let employees = localStorage["employees"];
-  employees = JSON.parse(employees);
-  return employees;
+  let contacts = localStorage["contacts"];
+  contacts = JSON.parse(contacts);
+  return contacts;
 };
 
-export const addEmployee = (employee) => {
-  const employees = getListEmployees();
-  employees.push(employee);
-  localStorage["employees"] = JSON.stringify(employees);
+export const addContact = (contact) => {
+  const contacts = getListContacts();
+  contacts.push(contact);
+  localStorage["contacts"] = JSON.stringify(contacts);
 };
 
-export const removeEmployee = (id) => {
-  let employees = getListEmployees();
-  employees = employees.filter((employee) => employee.id !== id);
-  localStorage["employees"] = JSON.stringify(employees);
+export const removeContact = (id) => {
+  let contacts = getListContacts();
+  contacts = contacts.filter((contact) => contact.id !== id);
+  localStorage["contacts"] = JSON.stringify(contacts);
 };
 
-export const getEmployeeById = (id) => {
-  const employees = getListEmployees();
-  const employee = employees.find((employee) => employee.id === id);
-  return employee;
+export const getContactById = (id) => {
+  const contacts = getListContacts();
+  const contact = contacts.find((contact) => contact.id === id);
+  return contact;
 };
 
-export const editEmployee = (id, newEmployee) => {
-  let employees = getListEmployees();
-  employees = employees.filter((employee) => employee.id !== id);
-  employees.push(newEmployee);
-  localStorage["employees"] = JSON.stringify(employees);
+export const editContact = (id, newContact) => {
+  let contacts = getListContacts();
+  contacts = contacts.filter((contact) => contact.id !== id);
+  contacts.push(newContact);
+  localStorage["contacts"] = JSON.stringify(contacts);
 };

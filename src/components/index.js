@@ -1,3 +1,3 @@
-export { EmployeeList } from "./EmployeeList";
-export { EmployeeForm } from "./EmployeeForm";
+export { ContactList } from "./ContactList";
+export { ContactForm } from "./ContactForm";
 export { Navbar } from "./Navbar";

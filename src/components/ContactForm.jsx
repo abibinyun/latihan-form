@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { addEmployee, getEmployeeById } from "../service/localstorage";
-import { useForm } from "./../hooks/useForm";
+import { addContact, getContactById, editContact } from "../service/localstorage";
+import { useForm } from "../hooks/useForm"
 import uuid from "react-uuid";
 import { useState, useEffect } from "react";
-import { editEmployee } from "./../service/localstorage";
 
-export const EmployeeForm = () => {
+export const ContactForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [showAlert, setshowAlert] = useState(false);
@@ -13,14 +12,15 @@ export const EmployeeForm = () => {
     name: "",
     email: "",
     phone: "",
-    position: "",
+    subject: "",
+    category: "",
     message: "",
   });
 
   useEffect(() => {
     if (id) {
-      const employee = getEmployeeById(id);
-      setForm(employee);
+      const contact = getContactById(id);
+      setForm(contact);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -28,7 +28,7 @@ export const EmployeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    id ? editEmployee(id, inputValues) : addEmployee({ id: uuid(), ...inputValues });
+    id ? editContact(id, inputValues) : addContact({ id: uuid(), ...inputValues });
     resetForm();
     setshowAlert(true);
     setTimeout(() => {
@@ -42,7 +42,7 @@ export const EmployeeForm = () => {
         <button type="button" className="btn btn-outline-secondary" onClick={() => navigate("/")}>
           Back
         </button>
-        <h1 className="text-center">{id ? "Edit" : "Add new"} Employee</h1>
+        <h1 className="text-center">{id ? "Edit" : "Add new"} Contact</h1>
         <div />
       </div>
 
@@ -52,7 +52,7 @@ export const EmployeeForm = () => {
             <label className="form-label mt-2" htmlFor="inputValid">
               Name
             </label>
-            <input pattern="[a-z]{1,15}" name="name" type="text" value={inputValues.name} onChange={handleInputChange} className="form-control" id="inputValid" title="Username should only contain lowercase letters. e.g. john" required />
+            <input  name="name" type="text" value={inputValues.name} onChange={handleInputChange} className="form-control" id="inputValid"  required />
           </div>
 
           <div className="form-group">
@@ -70,14 +70,22 @@ export const EmployeeForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="inputValid" className="form-label mt-4">
-              Position
+            <label className="form-label mt-2" htmlFor="inputValid">
+              Subject
             </label>
-            <select name="position" type="text" value={inputValues.position} onChange={handleInputChange} className="form-select" id="inputValid" required>
+            <input  name="subject" type="text" value={inputValues.subject} onChange={handleInputChange} className="form-control" id="inputValid"  required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputValid" className="form-label mt-4">
+              Category
+            </label>
+            <select name="category" type="text" value={inputValues.category} onChange={handleInputChange} className="form-select" id="inputValid" required>
               <option value="" selected disabled hidden>
                 Choose here
               </option>
-              <option value="Sales Support">Sales Support</option>
+              <option value="Sales">Sales</option>
+              <option value="Support">Support</option>
               <option value="Tehnical">Tehnical</option>
             </select>
           </div>
@@ -86,12 +94,12 @@ export const EmployeeForm = () => {
             <label className="form-label mt-2" htmlFor="inputValid">
               Message
             </label>
-            <textarea type="text" className="form-control" id="inputValid" name="message" value={inputValues.message} onChange={handleInputChange} rows="3" placeholder="type here" required />
+            <textarea type="text" className="form-control" id="inputValid" name="message" value={inputValues.message} onChange={handleInputChange} rows="3" placeholder="type here" required   />
           </div>
 
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-outline-primary btn-block">
-              {id ? "Edit" : "Add"} Employee
+              {id ? "Edit" : "Add"} Contact
             </button>
           </div>
         </form>
@@ -100,7 +108,7 @@ export const EmployeeForm = () => {
       {showAlert && (
         <div className="px-5">
           <div className="alert alert-success">
-            <strong>Well done!</strong> {id ? "edit" : "added a new"} Employee.
+            <strong>Well done!</strong> {id ? "edit" : "added a new"} Contact.
           </div>
         </div>
       )}

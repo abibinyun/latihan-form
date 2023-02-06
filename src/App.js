@@ -1,6 +1,6 @@
-import { EmployeeList } from "./components";
+import { ContactList } from "./components";
 import { Navbar } from "./components";
-import { EmployeeForm } from "./components";
+import { ContactForm } from "./components";
 import { Route, Routes } from "react-router-dom";
 
 export const App = () => {
@@ -9,9 +9,9 @@ export const App = () => {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<EmployeeList />} />
-          <Route path="/create-employee" element={<EmployeeForm />} />
-          <Route path="/edit-employee/:id" element={<EmployeeForm />} />
+          <Route path="/" element={<ContactList />} />
+          <Route path="/create-contact" element={<ContactForm />} />
+          <Route path="/edit-contact/:id" element={<ContactForm />} />
         </Routes>
       </div>
     </div>
